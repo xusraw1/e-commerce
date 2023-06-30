@@ -6,8 +6,18 @@
 
 {% block content %}
     <div class="container">
+        <br>
         <div class="row">
-            <div class="col-12 card mt-5 ">
+            <br>
+            {% if messages %}
+                {% for mess in messages %}
+                    <div class="alert alert-dark alert-dismissible fade show" role="alert">
+                        <b>{{ mess }}</b>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <div class="col-12 card mt-3">
                 <div class="row">
                     <div class="col-2 m-3">
                         <img class="img-thumbnail" width="150" height="150" src="{{ user.img.url }}"
@@ -17,13 +27,12 @@
                         <h2>{{ user.get_full_name }}</h2>
                         <p class="text-muted">@{{ user.username }} | {{ user.email }}</p>
                         {% if user == request.user %}
-                            <a class="btn btn-warning" href="#">Edit details</a>
+                            <a class="btn btn-warning" href="{% url 'update' %}">Edit details</a>
                             <a class="btn btn-danger" href="{% url 'password_change' %}">Update Password</a>
                         {% endif %}
                         <a class="btn btn-primary" href="mailto:{{ user.email }}">Email</a>
                         <a class="btn btn-primary" href="tel:{{ user.phone }}">Call</a>
                         <a class="btn btn-primary" href="https://t.me/{{ user.username }}">Telegram</a>
-
                     </div>
                 </div>
             </div>
@@ -33,7 +42,7 @@
     <br>
     <div class="container">
         <div class=" w-100 mt-4">
-        <h4 class="d-block">Recently Products of {{ user.first_name }}</h4>
+            <h4 class="d-block">Recently Products of {{ user.first_name }}</h4>
             {% if not user.product_set.exists %}
                 <center class="text-primary"><h2>There is no products</h2></center>
             {% endif %}
