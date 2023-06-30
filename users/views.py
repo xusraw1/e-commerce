@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import SignUpForm
 from django.views import View
 from django.contrib import messages
+from .models import CustomUser
 
 
 class SignUpView(View):
@@ -17,3 +18,11 @@ class SignUpView(View):
             return redirect('login')
         else:
             return render(request, 'registration/signup.html', {"form": form})
+
+
+class Profile(View):
+    def get(self, request, username):
+        user = get_object_or_404(CustomUser, username=username)
+        return render(request, 'profile.html', context={
+            'user': user
+        })
