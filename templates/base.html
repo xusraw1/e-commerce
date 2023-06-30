@@ -66,7 +66,7 @@
                         <li><a class="dropdown-item" href="#">Logout</a></li>
                     </ul>
                 {% else %}
-                    <a href="" class="btn btn-outline-primary">Login</a>
+                    <a href="{% url 'login' %}" class="btn btn-outline-primary">Login</a>
                     <a href="" class="btn btn-outline-secondary">SignUp</a>
                 {% endif %}
             </div>
