@@ -44,7 +44,7 @@
                     <p>{{ product.description }}</p>
                     <div class="contact mt-4 ">
                         {% if request.user == product.author %}
-                            <a class="btn btn-warning" href="#">Edit details</a>
+                            <a class="btn btn-warning" href="{% url 'update' product.id %}">Edit details</a>
                         {% endif %}
                         <a class="btn btn-primary" href="mailto:{{ product.author.email }}">Email</a>
                         <a class="btn btn-primary" href="tel:{{ product.number }}">Call</a>
