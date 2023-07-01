@@ -25,7 +25,7 @@
                             <span class="center card-text">$<small>{{ product.price }}</small></span>
                             <div class="buttons d-flex flex-wrap justify-content-between ">
                                 <i class="bi bi-bookmark-fill"></i>
-                                <a href="#" class="btn btn-outline-primary">Details</a>
+                                <a href="{% url 'product' product.id %}" class="btn btn-outline-primary">Details</a>
                             </div>
                         </div>
                     </div>

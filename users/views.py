@@ -20,12 +20,12 @@ class SignUpView(UserPassesTestMixin, View):
         else:
             return render(request, 'registration/signup.html', {"form": form})
 
-    def test_fucn(self):
+    def test_func(self):
         user = self.request.user
         if user.is_authenticated:
             return False
         else:
-            True
+            return True
 
 
 class Profile(View):
