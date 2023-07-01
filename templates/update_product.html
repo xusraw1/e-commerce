@@ -15,7 +15,11 @@
                     {% csrf_token %}
                     {{ form|crispy }}
                     <button type="submit" class="btn btn-outline-primary">Update</button>
-                    <a href="{% url 'product' product.id %}">Detail</a>
+                    <hr>
+                    <div class="btn-group" role="group" aria-label="Basic outlined example">
+                        <a href="{% url 'delete' product.id %}" class="btn btn-outline-danger">Delete</a>
+                        <a href="{% url 'product' product.id %}" class="btn btn-secondary">Detail</a>
+                    </div>
                 </form>
             </div>
             <div class="col"></div>

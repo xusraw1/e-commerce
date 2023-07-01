@@ -3,6 +3,8 @@ from .forms import ProductForm, UpdateProductForm
 from .models import ProductImage, Product
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+
+
 @login_required(login_url='login')
 def new_product(request):
     if request.method == 'GET':
@@ -18,9 +20,12 @@ def new_product(request):
             return redirect('commerce:index')
         return render(request, "product_new.html", {'form': form})
 
+
 def detail_product(request, product_id):
     product = Product.objects.get(id=product_id)
     return render(request, "product_detail.html", {'product': product})
+
+
 @login_required(login_url='login')
 def product_update(request, product_id):
     product = get_object_or_404(Product, id=product_id)
@@ -29,15 +34,29 @@ def product_update(request, product_id):
             form = UpdateProductForm(instance=product)
             return render(request, 'update_product.html', {'form': form, 'product': product})
         elif request.method == 'POST':
-            form = UpdateProductForm(intance=product, data=request.POST, files=request.FILES)
+            form = UpdateProductForm(instance=product, data=request.POST, files=request.FILES)
             if form.is_valid():
                 form.save()
-                if request.FILES.getlist['images']:
+                if request.FILES.getlist('images'):
                     ProductImage.objects.filter(product=product).delete()
-                    for i in request.FILES.getlist['images']:
+                    for i in request.FILES.getlist('images'):
                         ProductImage.objects.create(product=product, image=i)
                 return redirect('product', product.id)
             return render(request, 'update_product.html', {'form': form, 'product': product})
     else:
         messages.error(request, 'Acess danied!')
+        return redirect('commerce:index')
+
+
+def product_delete(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    if request.user == product.author:
+        if request.method == 'POST':
+            product.delete()
+            messages.info(request, "Product deleted successfully!")
+            return redirect('commerce:index')
+        else:
+            return render(request, 'product_delete.html', {'product': product})
+    else:
+        messages.error(request, "You can`t delete product, because you don`t author for this prodcut!")
         return redirect('commerce:index')
