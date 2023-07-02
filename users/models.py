@@ -14,7 +14,6 @@ class CustomUser(AbstractUser):
 class Saved(models.Model):
     product = models.ForeignKey("products.Product", on_delete=models.CASCADE)
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    text = models.CharField(max_length=200)
     date = models.DateField(auto_now_add=True)
 
     def __str__(self):

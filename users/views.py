@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import SignUpForm, UpdateProfile
 from django.views import View
 from django.contrib import messages
-from .models import CustomUser
+from .models import CustomUser, Saved
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from products.models import Product
 
 
 class SignUpView(UserPassesTestMixin, View):
@@ -51,3 +52,31 @@ class UpdateProfileView(LoginRequiredMixin, View):
             return redirect('profile', request.user.username)
         else:
             return render(request, 'registration/signup.html', {"form": form})
+
+
+class AddRemoveSavedView(LoginRequiredMixin, View):
+    def get(self, request, product_id):
+        product = get_object_or_404(Product, id=product_id)
+        saved_product = Saved.objects.filter(author=request.user, product=product)
+        if saved_product:
+            saved_product.delete()
+            messages.info(request, "Removed.")
+        else:
+            Saved.objects.create(author=request.user, product=product)
+        return redirect(request.Meta.get('HTTP_REFERER'))
+
+
+class SavedView(LoginRequiredMixin, View):
+    def get(self, request):
+        saveds = Saved.objects.filter(author=request.user)
+        return render(request, 'saved.html', {'saveds': saveds})
+
+
+class RecentlyViewed(View):
+    def get(self, request):
+        if not "recently_viewed" in request.session:
+            products = []
+        else:
+            r_viewed = request.session["recently_viewed"]
+            products = Product.objects, filter(id__in=r_viewed)
+        return render(request, "recently.html", {'products': products})
