@@ -25,7 +25,7 @@ def new_product(request):
 def detail_product(request, product_id):
     product = get_object_or_404(Product, id=product_id)
 
-    if 'recently_viewed' in request.seesion:
+    if 'recently_viewed' in request.session:
         r_viewed = request.session['recently_viewed']
         if not product.id in r_viewed:
             r_viewed.append(product.id)

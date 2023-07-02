@@ -55,6 +55,7 @@ class UpdateProfileView(LoginRequiredMixin, View):
 
 
 class AddRemoveSavedView(LoginRequiredMixin, View):
+    login_url = 'login'
     def get(self, request, product_id):
         product = get_object_or_404(Product, id=product_id)
         saved_product = Saved.objects.filter(author=request.user, product=product)
@@ -63,17 +64,18 @@ class AddRemoveSavedView(LoginRequiredMixin, View):
             messages.info(request, "Removed.")
         else:
             Saved.objects.create(author=request.user, product=product)
-        return redirect(request.Meta.get('HTTP_REFERER'))
+        return redirect(request.META.get('HTTP_REFERER'))
 
 
 class SavedView(LoginRequiredMixin, View):
+    login_url = 'login'
     def get(self, request):
         saveds = Saved.objects.filter(author=request.user)
-        q = request.GET['q']
+        q = request.GET.get('q')
         if q:
             products = Product.objects.filter(title__icontains=q)
             saveds = Saved.objects.filter(products__in=products, author=request.user)
-        return render(request, 'saved.html', {'saveds': saveds})
+        return render(request, 'saveds.html', {'saveds': saveds})
 
 
 class RecentlyViewed(View):
@@ -83,7 +85,7 @@ class RecentlyViewed(View):
         else:
             r_viewed = request.session["recently_viewed"]
             products = Product.objects.filter(id__in=r_viewed)
-            q = request.GET['q']
+            q = request.GET.get('q')
             if q:
                 products = products.filter(title__icontains=q)
         return render(request, "recently.html", {'products': products})
