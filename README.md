@@ -1,10 +1,8 @@
-# <span style="color: #f00"> Django E-Commerce </span>
+# Django E-Commerce 
 
-<span style="color: #eaff00">
 Django Commerce is an e-commerce web application built with Django framework. It allows users to sign up, create profiles, view and search for products, add products to their saved list, view recently viewed products, and interact with product comments.
-</span>
 
-## <span style="color: #0fe"> Features </span>
+## Features
 
 1. **User Registration**:
    `Users can register for an account to access the full features of the application. Only non-authenticated users can access the registration page.`
@@ -25,7 +23,7 @@ Django Commerce is an e-commerce web application built with Django framework. It
 5. **Recently Viewed Products**:
    `Users can view recently viewed products. The recently viewed products are stored in the session.`
 
-## <span style="color: #0fe"> Installation </span>
+## Installation
 
 * Clone the repository:
   `git clone https://github.com/xusraw1/e-commerce`
@@ -49,7 +47,7 @@ Django Commerce is an e-commerce web application built with Django framework. It
 
 * Open the web browser and visit [E-commerce](http://localhost:8000) to access the application.
 
-## <span style="color: #0fe"> Configuration </span>
+## Configuration
 
 The Django Commerce project uses the default Django configuration with the following additional settings:
 
@@ -69,7 +67,7 @@ The Django Commerce project uses the default Django configuration with the follo
     * You may need to configure your web server or file serving mechanism to serve these media files in a production
       environment.
 
-## <span style="color: #0fe"> Usage </span>
+## Usage
 
 1. Register a new account by visiting the registration page.
 2. Log in to your account.
@@ -86,7 +84,7 @@ The Django Commerce project uses the default Django configuration with the follo
     comment.
 12. To delete a comment, click on the "Delete" link next to your comment (available only for the comment owner).
 
-## <span style="color: #0fe"> Images </span>
+## Images
 
 > **Home PAGE**
 <img src="commerce-images/home.png" alt="Home" width=100%>
@@ -109,25 +107,11 @@ The Django Commerce project uses the default Django configuration with the follo
 > **Password Change PAGE**
 <img src="commerce-images/ps-change.png" alt="Password Change" width=100%>
 
-<style>
-a:hover {
-  color: white;
-}
-</style>
 
->>>>>>>>>>>>>>>> <table style="background-color: black;">
-  <tr>
-    <th style="color: dodgerblue">LinkedIn</th>
-    <th style="color: #0b5ed7">Twitter</th>
-    <th style="color: steelblue">Telegram</th>
-    <th style="color: orange">Email</th>
-  </tr>
-  <tr>
-    <td><a href="https://www.linkedin.com/in/xusrav-maxmadjanov-80b614246/" style="text-decoration: none;">Linkedin</a></td>
-    <td><a href="https://twitter.com/Xusrav2003" style="text-decoration: none;">Twitter</a></td>
-    <td><a href="https://t.me/xmn2003" style="text-decoration: none;">Telegram</a></td>
-    <td>xusrav200329@gmail.com</td>
-  </tr>
-</table> 
+| LinkedIn                                                              | Twitter                                   | Telegram                         | Email              |
+|-----------------------------------------------------------------------|-------------------------------------------|----------------------------------|--------------------|
+| [Linkedin](https://www.linkedin.com/in/xusrav-maxmadjanov-80b614246/) | [Twitter](https://twitter.com/Xusrav2003) | [Telegram](https://t.me/xmn2003) | xusrav200329@gmail.com |
 
+` This project was made according to a video tutorial on YouTube, it was interesting to write this project, I learned a lot and mastered the project from this, in short, I did not do this project myself, that is, I did not invent logic, etc., but just wrote on it and that's it. `
 
+~ Thanks for watching, put an asterisk 🌟
