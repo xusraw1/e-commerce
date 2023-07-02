@@ -69,6 +69,10 @@ class AddRemoveSavedView(LoginRequiredMixin, View):
 class SavedView(LoginRequiredMixin, View):
     def get(self, request):
         saveds = Saved.objects.filter(author=request.user)
+        q = request.GET['q']
+        if q:
+            products = Product.objects.filter(title__icontains=q)
+            saveds = Saved.objects.filter(products__in=products, author=request.user)
         return render(request, 'saved.html', {'saveds': saveds})
 
 
@@ -78,5 +82,8 @@ class RecentlyViewed(View):
             products = []
         else:
             r_viewed = request.session["recently_viewed"]
-            products = Product.objects, filter(id__in=r_viewed)
+            products = Product.objects.filter(id__in=r_viewed)
+            q = request.GET['q']
+            if q:
+                products = products.filter(title__icontains=q)
         return render(request, "recently.html", {'products': products})
