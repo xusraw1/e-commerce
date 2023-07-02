@@ -78,15 +78,25 @@
                 </div>
                 <div class="col-4 mt-5 shadow-sm ">
                     <h6 class="pt-2">Add comment</h6>
-                    <form action="#" method="post" class="input-group">
+                    <form action="{% url 'coment' product.id %}" method="post" class="input-group">
+                        {% csrf_token %}
                         <input class="form-control" name="body" type="text" placeholder="Type your comment..."
                                aria-describedby="'button-addon">
                         <button class="btn btn-outline-success" type="submit" id="button-addon">Send</button>
                     </form>
                     <hr>
                     <h6>Comments</h6>
-                    <small class="text-muted">@akbarjon | 24.01.2023</small>
-                    <p>This is super)</p>
+                    {% for i in product.comment_set.all %}
+                        <small class="text-muted"><a
+                                href="{% url 'profile' i.author.username %}"><b>@{{ i.author.username }}</b></a>
+                            | {{ i.date }}</small>
+                        <p>{{ i.text }}
+                            {% if request.user == i.author %}
+                                <small><a
+                                        href="{% url 'comment_delete' product.id i.id %}">delete</a></small>
+                            {% endif %}
+                        </p>
+                    {% endfor %}
                 </div>
             </div>
 

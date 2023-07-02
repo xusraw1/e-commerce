@@ -78,13 +78,17 @@
 {% endblock %}
 
 
-{#<div class="container">#}
-{#    <div style="z-index: 312;" class="shadow-sm position-fixed end-0 bottom-0 mt-4">#}
-{#        <div style="width: 20rem; opacity:0.9" class=" m-3 alert alert-info" role="alert">#}
-{#            Message Sample#}
-{#        </div>#}
-{#    </div>#}
-{#</div>#}
+<div class="container">
+    {% if messages %}
+        <div style="z-index: 312;" class="shadow-sm position-fixed end-0 bottom-0 mt-4">
+            {% for message in messages %}
+                <div style="width: 20rem; opacity:0.9" class=" m-3 alert alert-{{ message.tags }}" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
 
 <div class="footer m-5 mb-3 ">
     <center class="text-muted">Xusrav DEV | 2023</center>
